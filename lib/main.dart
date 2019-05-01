@@ -12,6 +12,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
+  bool _visible;
+
+  @override
+  void initState() {
+    _visible = true;
+  }
+
+  void _toggleVisible() {
+    setState(() => _visible = !_visible);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +33,14 @@ class _State extends State<MyApp> {
         padding: EdgeInsets.all(32.0),
         child: Column(
           children: <Widget>[
-            Text(
-              'Add Widgets Here',
+            Opacity(
+              opacity: _visible ? 1.0 : 0.2,
+              child: Text('Now you see me, now you don\'t'),
             ),
+            RaisedButton(
+              onPressed: _toggleVisible,
+              child: Text('Toggle'),
+            )
           ],
         ),
       ),
